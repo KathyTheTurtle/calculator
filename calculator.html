@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <style>
+            #calculator {
+                position: absolute;
+                margin: auto;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                border:1px solid black;
+                width: 400px;
+                height: 400px;
+            }
+
+            #screen {
+                margin:auto;
+                margin-top:10px;
+                border:1px solid black;
+                width: 300px;
+                height: 100px;
+                font-size:70px;
+                text-align: right;
+            }
+
+            #numbers {
+                float: left;
+                margin-top: 10px;
+                margin-left:10px;
+                margin-right:10px;
+                border:1px solid black;
+                width: 175px;
+                height: 250px;
+            }
+
+            #operations {
+                float: right;
+                margin-top: 10px;
+                margin-right:10px;
+                border:1px solid black;
+                width: 175px;
+                height: 250px;
+            }
+
+            .number{
+                font-size:70;
+            }
+            .operation{
+                font-size:100;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="calculator">
+            <div id="screen"></div>
+            <div id="numbers">
+                <span onclick="displayNumber(0)" class="number">0</span>
+                <span onclick="displayNumber(1)" class="number">1</span>
+                <span onclick="displayNumber(2)" class="number">2</span>
+                <span onclick="displayNumber(3)" class="number">3</span>
+                <span onclick="displayNumber(4)" class="number">4</span>
+                <span onclick="displayNumber(5)" class="number">5</span>
+                <span onclick="displayNumber(6)" class="number">6</span>
+                <span onclick="displayNumber(7)" class="number">7</span>
+                <span onclick="displayNumber(8)" class="number">8</span>
+                <span onclick="displayNumber(9)" class="number">9</span>
+            </div>
+            <div id="operations">
+                <span onclick="operations('add')" class="operation">+</span>
+                <span onclick="operations('sub')" class="operation">-</span>
+                <span onclick="operations('mult')"class="operation">*</span>
+                <span onclick="operations('divide')" class="operation">/</span>
+                <span onclick="equals()" class="operation">=</span>
+                <span onclick="clearNumber()" class="operation">C</span>
+            </div>
+        </div>
+        <script>
+            let previous;
+            let operation;
+
+            function getScreen(){
+                return document.getElementById("screen");
+            }
+
+            function setScreen(value) {
+                getScreen().innerText = value; 
+            }
+
+            function displayNumber(x) {
+                let screen = getScreen();
+                if (screen.innerText == 0){
+                    screen.innerText = x;
+                } else {
+                    screen.innerText += x;
+                }
+            }
+
+            function clearNumber() {
+                let screen = getScreen();
+                screen.innerText = "0";
+            }
+
+            function operations(type) {
+                if (type === 'add'){
+                    let screen = getScreen();
+                    previous = screen.innerText;
+                    operation = 'add';
+                    clearNumber();
+                }
+
+                if (type === 'sub') {
+                    let screen = getScreen();
+                    previous = screen.innerText;
+                    operation = 'sub';
+                    clearNumber();
+                }
+
+                if (type === 'mult') {
+                    let screen = getScreen();
+                    previous = screen.innerText;
+                    operation = 'mult';
+                    clearNumber();
+                }
+
+                if (type === 'divide') {
+                    let screen = getScreen();
+                    previous = screen.innerText;
+                    operation = 'divide';
+                    clearNumber();
+                }
+            }
+
+            function equals(){
+                let screen = getScreen();
+                let newNumb = screen.innerText;
+
+                if (operation == 'add') {
+                    setScreen(Number(previous) + Number(newNumb));
+                } else if (operation == 'sub') {
+                    setScreen(Number(previous) - Number(newNumb));
+                } else if (operation == 'mult') {
+                    setScreen(Number(previous) * Number(newNumb));
+                } else if (operation == 'divide') {
+                    setScreen(Number(previous) / Number(newNumb));
+                }
+            }
+        </script>
+    </body>
+</html>
